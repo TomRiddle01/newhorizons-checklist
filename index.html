@@ -2,16 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Critter Collection</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <script src="data.js" ></script>
     <script src="app.js" ></script>
+
 </head>
 <body>
     <div class="panel-row">
         <div id="bugs" class="animal-area"></div>
         <div id="controls" class="right-panel">
-            <input type="checkbox" onchange="toggleCollectedVisibility(this)">hide all collected critters</input>
+            <div class="animal-div demo" data-arriving="true" data-available="true"><img class="animal-img small-img" src="fish/NH-Icon-oliveflounder.webp"><span>New this month</span></div>
+
+            <div class="animal-div demo" data-leaving="true" data-available="true"><img class="animal-img small-img" src="fish/NH-Icon-oliveflounder.webp"><span>Leaving after this month</span></div>
+            <div class="animal-div demo" data-available="true"><img class="animal-img small-img" src="fish/NH-Icon-oliveflounder.webp"><span>Available this month</span></div>
+            <div class="animal-div demo" data-arriving="true" data-unavailable="true"><img class="animal-img small-img" src="fish/NH-Icon-oliveflounder.webp"><span>Not available</span></div>
+            <div class="animal-div demo" data-collected="true" ><img class="animal-img small-img" src="fish/NH-Icon-oliveflounder.webp"><span>Collected</span></div>
+            <br>
+            Settings: <br>
+            <input type="checkbox" onchange="toggleSetting(this, 'data-hide-all-collected')" id="hidebox"/><label for="hidebox">hide all collected critters</label>
+            <br>
+            <input type="checkbox" onchange="toggleSetting(this, 'data-hide-all-colors')" id="colorsbox"/><label for="colorsbox">remove colors</label>
+            <br>
+            <input type="checkbox" onchange="toggleSetting(this, 'data-show-all-unavailable')" id="unavailablebox"/><label for="unavailablebox">show unavailable critters</label>
         </div>
     </div>
     <div class="panel-row">

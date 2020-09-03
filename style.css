@@ -1,4 +1,6 @@
-
+body{
+    background: beige;
+}
 .animal-area{
     margin: 6px;
     width: 1024px;
@@ -6,9 +8,11 @@
     column-gap: 0px;
     display: inline-block;
     height: 340px;
-    background: beige;
+    background: burlywood;
     padding: 0px;
     border: 0px;
+    box-shadow: 1px 1px 3px black;
+    border-radius: 10px;
 }
 
 #controls{
@@ -20,6 +24,9 @@
     column-count: 1;
     column-gap: 0px;
     border: 0px;
+
+    font-size: 20px;
+    font-family: cursive;
 }
 .right-panel{
     position: absolute;
@@ -56,14 +63,36 @@
 .animal-div[data-arriving] .animal-img{
     filter: grayscale(1) opacity(0.2) drop-shadow(0px 0px 3px green);
 }
+
+body[data-hide-all-colors] .animal-div[data-available] .animal-img{
+    filter: grayscale(1) opacity(0.2);
+}
+
 .animal-div[data-unavailable] .animal-img{
-    filter: opacity(0.1) ;
+    filter: opacity(0) ;
+}
+body[data-show-all-unavailable] .animal-div[data-unavailable] .animal-img{
+    filter: opacity(0.1);
 }
 
 .animal-div[data-collected] .animal-img{
-    filter: opacity(1) grayscale(0) drop-shadow(0px 0px 0px black);
+    filter: opacity(1) grayscale(0) drop-shadow(0px 0px 0px black) !important;
 }
 
 body[data-hide-all-collected] .animal-div[data-collected] .animal-img{
-    filter: opacity(0) grayscale(0) drop-shadow(0px 0px 0px black);
+    filter: opacity(0) grayscale(0) drop-shadow(0px 0px 0px black) !important;
+}
+
+
+
+.small-img{
+    width: 32px;
+}
+.demo{
+    height: 32px;
+    width: 400px;
+}
+.demo span{
+    margin-left: 3px;
+    vertical-align: super;
 }

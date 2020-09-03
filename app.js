@@ -10,11 +10,18 @@ window.onload = function(){
     filterAvailableAnimals("fish", fish_data)
     filterAvailableAnimals("sea", sea_data)
 }
-function toggleCollectedVisibility(e){
+function toggleSetting(e, setting){
     if(e.checked){
-        document.body.setAttribute("data-hide-all-collected", true);
+        document.body.setAttribute(setting, true);
     }else{
-        document.body.removeAttribute("data-hide-all-collected");
+        document.body.removeAttribute(setting);
+    }
+}
+function toggleColorVisibility(e){
+    if(e.checked){
+        document.body.setAttribute("data-hide-all-colors", true);
+    }else{
+        document.body.removeAttribute("data-hide-all-colors");
     }
 }
 function createCollection(){
