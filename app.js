@@ -24,6 +24,8 @@ function toggleColorVisibility(e){
         document.body.removeAttribute("data-hide-all-colors");
     }
 }
+
+
 function createCollection(){
     //localStorage.removeItem("collection")
     collection = JSON.parse(localStorage.getItem('collection'));
@@ -40,24 +42,25 @@ function createCollection(){
         console.log("local storage loaded")
     }
 }
+let months = [];
+months[0] = "Jan";
+months[1] = "Feb";
+months[2] = "Mar";
+months[3] = "Apr";
+months[4] = "May";
+months[5] = "Jun";
+months[6] = "Jul";
+months[7] = "Aug";
+months[8] = "Sep";
+months[9] = "Oct";
+months[10] = "Nov";
+months[11] = "Dec";
 
 function getMonth(offset){
-    let month = [];
-    month[0] = "Jan";
-    month[1] = "Feb";
-    month[2] = "Mar";
-    month[3] = "Apr";
-    month[4] = "May";
-    month[5] = "Jun";
-    month[6] = "Jul";
-    month[7] = "Aug";
-    month[8] = "Sep";
-    month[9] = "Oct";
-    month[10] = "Nov";
-    month[11] = "Dec";
+
 
     let d = new Date();
-    return month[(d.getMonth()+offset) % 12];
+    return months[(d.getMonth()+offset) % 12];
 }
 
 function filterAvailableAnimals(divId, data){
@@ -69,7 +72,7 @@ function filterAvailableAnimals(divId, data){
         let current_month = getMonth(0)
         let prev_month = getMonth(-1)
         let next_month = getMonth(1)
-        console.log(current_month)
+
 
         if(animal[current_month]){
 
@@ -106,6 +109,9 @@ function renderTable(divId, data){
 
 
 
+
+    tooltip = document.getElementById("tooltip");
+
     i = 0;
     data.forEach(animal => {
         let element = document.getElementById(`${divId}-${i}`)
@@ -116,10 +122,43 @@ function renderTable(divId, data){
         img.addEventListener("click", e => {
             element.toggleAttribute("data-collected")
 
-            collection = collection = JSON.parse(localStorage.getItem('collection'));
-            console.log(collection)
+            collection = JSON.parse(localStorage.getItem('collection'));
+
             collection[animal.Name] = !collection[animal.Name]
             localStorage.setItem('collection', JSON.stringify(collection));
+        });
+        img.addEventListener("mousemove", e => {
+            var x = e.clientX;
+            var y = e.clientY;
+            tooltip.style.left = x + 'px';
+            tooltip.style.top = y + 'px';
+            tooltip.style.visibility = 'visible';
+
+            collection = JSON.parse(localStorage.getItem('collection'));
+
+            document.getElementById("info_name").innerText = animal.Name
+            document.getElementById("info_price").innerText = animal.Price + " Bells"
+            document.getElementById("info_image").src = `${divId}/${animal.Image}.webp`
+            if(animal.Location){
+                document.getElementById("info_location").innerText = animal.Location
+            }else{
+
+                document.getElementById("info_location").innerText = "Ocean"
+            }
+            document.getElementById("info_time").innerText = animal.Time
+
+            ;[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].forEach(m => {
+               month = document.getElementById("m_"+m);
+               if(animal[months[m]]){
+                   month.style.opacity = "1";
+               }else{
+                   month.style.opacity = "0.2";
+               }
+            });
+
+        });
+        img.addEventListener("mouseout", e => {
+            tooltip.style.visibility = 'hidden';
         });
         i++;
     });
